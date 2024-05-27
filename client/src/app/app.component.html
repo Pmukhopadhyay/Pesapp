@@ -1,0 +1,137 @@
+<div [formGroup]="form" id="form" *ngIf="!authService.token">
+  <input formControlName="email" type="text" placeholder="Email" /><br/>
+  <input formControlName="password" type="password" placeholder="Password" /><br/>
+  <button (click)="submit()">Login</button>
+</div>
+<!-- Auth Token start-->
+<!--********************************************************-->
+<div *ngIf="authService.token">
+<!--********************************************************-->
+<nav class="navbar navbar-dark bg-primary">
+  Welcome {{authService.email}}
+  <button (click)="authService.logout()">Logout</button>
+</nav>
+  <!--*******************Default start*************************************-->
+<div *ngIf="isDefault">
+  <!--********************************************************-->
+  <!--data grid - start -->
+  <br/>
+  <button  type="submit" class="btn btn-primary" 
+    id="addRow"
+    (click)="addRow($event)"
+    >Add New Row</button>
+
+  <mat-form-field>
+    <span>Filter</span>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+  <!--mattable -->
+  <table mat-table [dataSource]="taskDatasource" class="mat-elevation-z8 demo-table">
+    <!-- Name Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let task"> {{ task.title }} </td>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let task"> {{ task.description}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let task"> {{ task.status}} 
+      </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="edit row">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell  *matCellDef="let task"> 
+        <button  type="submit" class="btn btn-primary" 
+        id="edit-{{task._id}}"
+        (click)="editTask($event)"
+        >Edit</button>
+      </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="delete row">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell  *matCellDef="let task"> 
+        <button  type="submit" class="btn btn-primary"
+        id="delete-{{task._id}}"
+        (click)="deleteTask($event)"
+        >Delete</button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="taskColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: taskColumns;"></tr>
+  </table>
+  <!--data grid - end -->
+    <!--*******************Default end*************************************-->
+</div>
+  <!--********************************************************-->
+
+  <!--*******************Edit start*************************************-->
+<div *ngIf="isEdit">
+  <!--********************************************************-->
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Title</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title">
+      <small id="emailHelp" class="form-text text-muted">This is a must have field.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Description</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Description">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Status</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Status">
+      <small id="emailHelp" class="form-text text-muted">This is a must have field.</small>
+    </div>
+    
+    <button  type="submit" class="btn btn-primary" id="updateTask" (click)="updateTask($event)">Update</button>
+  </form>
+  
+   <!--*******************Edit end*************************************-->
+  </div>
+  <!--********************************************************-->
+    <!--*******************Add start*************************************-->
+<div class="form-group" [formGroup]="addForm" id="addForm" *ngIf="isAdd">
+  <!--********************************************************-->
+    <div  class="form-group">
+      <label for="exampleInputEmail1">Title</label>
+      <input type="text" class="form-control" 
+      formControlName="title" type="text" 
+       aria-describedby="emailHelp" 
+      placeholder="Enter Title"/>
+
+      <small id="emailHelp" class="form-text text-muted">This is a must have field.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Description</label>
+      <input type="text" class="form-control" 
+      formControlName="description" type="text" 
+       aria-describedby="emailHelp" 
+      placeholder="Enter Description"/>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Status</label>
+      <input type="text" class="form-control" 
+      formControlName="status" type="text" 
+       aria-describedby="emailHelp" 
+      placeholder="Enter status"/>
+      <small id="emailHelp" class="form-text text-muted">This is a must have field.</small>
+    </div>
+    
+    <button  type="submit" class="btn btn-primary" id="addTask"
+    (click)="addTask()"
+    >Add</button>
+
+   <!--*******************Add end*************************************-->
+  </div>
+  <!--********************************************************-->
+
+<!--****************Auth Token - End****************************************-->
+</div>
+<!--********************************************************-->

@@ -1,0 +1,79 @@
+#form{
+    display:flex;
+    gap:1px;
+    flex-direction: column;
+    width: 400px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.mat-header-cell {
+    color: red;
+  }
+  .mat-cell {
+    color: blue;
+  }
+  /* Anything below xs */ 
+@media only screen and (min-width : 1px) {
+    .btn-sq {
+      padding: 4px;
+      width: 20px;
+      height: 20px;
+      font-size: 8px;
+      background-color: black;
+      color: white;
+  }
+}
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 320px) {
+    .btn-sq {
+      width: 25px;
+      height: 25px;
+      font-size: 11px;
+      background-color: pink;
+  }
+}
+
+/* Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+    .btn-sq {
+      width: 50px;
+      height: 50px;
+      font-size: 13px;
+      background-color: yellow;
+      color: black;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .btn-sq {
+      width: 100px;
+      height: 100px;
+      font-size: 16px;
+      background-color: green;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .btn-sq {
+      width: 150px;
+      height: 150px;
+      font-size: 18px;
+      background-color: red;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
